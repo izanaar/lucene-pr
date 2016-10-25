@@ -49,4 +49,13 @@ public class AnalyzerUtils {
 
         stream.close();
     }
+
+    public static void showTokenWords(TokenStream tokenStream) throws IOException {
+        CharTermAttribute word = tokenStream.addAttribute(CharTermAttribute.class);
+        tokenStream.reset();
+
+        while (tokenStream.incrementToken()){
+            System.out.println(word.toString());
+        }
+    }
 }
