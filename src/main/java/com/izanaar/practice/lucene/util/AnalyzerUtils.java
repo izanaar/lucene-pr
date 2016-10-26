@@ -3,9 +3,11 @@ package com.izanaar.practice.lucene.util;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.*;
+import org.apache.lucene.document.Document;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
 
 public class AnalyzerUtils {
 
@@ -58,4 +60,5 @@ public class AnalyzerUtils {
             System.out.println(word.toString());
         }
     }
+
 }
