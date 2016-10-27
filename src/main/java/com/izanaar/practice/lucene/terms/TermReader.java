@@ -3,10 +3,12 @@ package com.izanaar.practice.lucene.terms;
 import com.izanaar.practice.lucene.util.PhrasesUtil;
 import com.izanaar.practice.lucene.util.Util;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.index.*;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
+import org.apache.lucene.util.AttributeSource;
 import org.apache.lucene.util.BytesRef;
 
 import java.io.IOException;
@@ -27,9 +29,13 @@ class TermReader {
         TermsEnum termsEnum = terms.iterator();
         BytesRef  bytesRef = termsEnum.next();
         while(bytesRef  != null){
-            System.out.print(" BytesRef: " + bytesRef.utf8ToString());
-            System.out.print(" docFreq: " + termsEnum.docFreq());
-            System.out.println(" totalTermFreq: " + termsEnum.totalTermFreq());
+            System.out.print(" token: '" + bytesRef.utf8ToString());
+            System.out.print("' docFreq: '" + termsEnum.docFreq());
+            System.out.println("' totalTermFreq: '" + termsEnum.totalTermFreq() + "'");
+
+            AttributeSource attributeSource = termsEnum.attributes();
+            OffsetAttribute offsetAttribute = attributeSource.addAttribute(OffsetAttribute.class);
+
             bytesRef = termsEnum.next();
         }
     }

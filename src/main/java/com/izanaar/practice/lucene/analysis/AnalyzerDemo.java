@@ -9,7 +9,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 
 import java.io.IOException;
 
-public class AnalyzerDemo {
+class AnalyzerDemo {
 
     private static final String[] examples = {
             "The quick brown fox jumped over the lazy dog",
@@ -33,7 +33,6 @@ public class AnalyzerDemo {
             System.out.println();
         }
     }
-
 
     static void analyzeWithDetails(String text) throws IOException{
         analyzeWithDetails(text, analyzers);
