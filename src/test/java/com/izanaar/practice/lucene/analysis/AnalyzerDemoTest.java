@@ -38,4 +38,5 @@ public class AnalyzerDemoTest {
     public void synonymReplacement() throws Exception {
         AnalyzerDemo.analyzeWithDetails("tempest", new SimpleSynonymAnalyser());
     }
+
 }
