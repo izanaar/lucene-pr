@@ -2,6 +2,8 @@ package com.izanaar.practice.lucene.util;
 
 import org.apache.lucene.document.*;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,9 +25,10 @@ public class PhrasesUtil {
      * Loads epic WoW character phrases from this.FILE_NAME, located within project resources.
      *
      * @return List of documents, parsed from text file.
-     * @throws Exception in case of URI parse failure, or file absence.
+     * @throws IOException in case of file absence.
+     * @throws URISyntaxException in case of URL parse failure
      */
-    public static List<Document> loadPhrasesAsDocuments() throws Exception {
+    public static List<Document> loadPhrasesAsDocuments() throws URISyntaxException, IOException {
         Path phrasesPath = Paths.get(ClassLoader.getSystemResource("phrases.txt").toURI());
 
         return Files.lines(phrasesPath)

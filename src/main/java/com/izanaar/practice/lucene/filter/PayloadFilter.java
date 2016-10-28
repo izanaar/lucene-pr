@@ -15,7 +15,6 @@ public class PayloadFilter extends TokenFilter {
      */
 
     private PayloadAttribute payloadAttribute;
-    private int counter = 2;
 
     public PayloadFilter(TokenStream input) {
         super(input);
