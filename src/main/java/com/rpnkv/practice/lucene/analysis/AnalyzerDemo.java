@@ -9,6 +9,9 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 
 import java.io.IOException;
 
+/**
+ * Outputs tokens, produced by analyzer provided.
+ */
 class AnalyzerDemo {
 
     private static final String[] examples = {

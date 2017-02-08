@@ -18,30 +18,27 @@ public class PerFieldAnalyzerTest {
 
     private CustomizableSearcher searcher;
 
-    private String queryPhrase = "was",
-            sourceText = "Tempest Keep was merely";
-
-    private PerFieldAnalyzerWrapper analyzerWrapper;
-
     private static final String SIMPLE_FIELD_NAME = "simple", STANDARD_FIELD_NAME = "standard";
 
     @Before
     public void setUp() throws Exception {
-        analyzerWrapper = new PerFieldAnalyzerWrapper(
+        PerFieldAnalyzerWrapper analyzerWrapper = new PerFieldAnalyzerWrapper(
                 new SimpleAnalyzer(),
                 Collections.singletonMap("standard", new StandardAnalyzer())
         );
 
         searcher = new CustomizableSearcher(Arrays.asList(SIMPLE_FIELD_NAME, STANDARD_FIELD_NAME), analyzerWrapper);
+        String sourceText = "Tempest Keep was merely";
         searcher.addToIndex(Arrays.asList(sourceText, sourceText));
     }
 
     @Test
     public void testWrapper() throws Exception {
-        Query smplQuery = new TermQuery(new Term(SIMPLE_FIELD_NAME, queryPhrase)),
-                stdQuery = new TermQuery(new Term(STANDARD_FIELD_NAME, queryPhrase));
+        String queryPhrase = "was";
+        Query simpleAnalyzerQuery = new TermQuery(new Term(SIMPLE_FIELD_NAME, queryPhrase)),
+                standardAnalyzerQuery = new TermQuery(new Term(STANDARD_FIELD_NAME, queryPhrase));
 
-        assertEquals(1, searcher.searchForCount(smplQuery));
-        assertEquals(0, searcher.searchForCount(stdQuery));
+        assertEquals(1, searcher.searchForCount(simpleAnalyzerQuery));
+        assertEquals(0, searcher.searchForCount(standardAnalyzerQuery));
     }
 }

@@ -28,6 +28,14 @@ public class CustomizableSearcher {
         directory = new RAMDirectory();
     }
 
+    public TopDocs searchForDocs(Query query) throws IOException {
+        DirectoryReader directoryReader = DirectoryReader.open(directory);
+        IndexSearcher searcher = new IndexSearcher(directoryReader);
+        TopDocs searchResult = searcher.search(query, searcher.count(query));
+        directoryReader.close();
+        return searchResult;
+    }
+
     public void addToIndex(List<String> values) throws IOException {
         if (values.size() != fieldNames.size())
             throw new RuntimeException("Values list length does not match required!");
@@ -42,14 +50,6 @@ public class CustomizableSearcher {
         indexWriter.close();
     }
 
-    public TopDocs searchForDocs(Query query) throws IOException {
-        DirectoryReader directoryReader = DirectoryReader.open(directory);
-        IndexSearcher searcher = new IndexSearcher(directoryReader);
-        TopDocs searchResult = searcher.search(query, searcher.count(query));
-        directoryReader.close();
-        return searchResult;
-    }
-
     public int searchForCount(Query query) throws IOException{
         DirectoryReader directoryReader = DirectoryReader.open(directory);
         IndexSearcher searcher = new IndexSearcher(directoryReader);
@@ -58,11 +58,4 @@ public class CustomizableSearcher {
         return count;
     }
 
-    public List<String> getFieldNames() {
-        return fieldNames;
-    }
-
-    public String getFieldName(int fieldIndex) {
-        return fieldNames.get(fieldIndex);
-    }
 }
