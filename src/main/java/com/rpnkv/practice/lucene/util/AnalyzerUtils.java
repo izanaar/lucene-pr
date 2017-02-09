@@ -9,9 +9,6 @@ import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class AnalyzerUtils {
 
@@ -63,26 +60,6 @@ public class AnalyzerUtils {
         while (tokenStream.incrementToken()) {
             System.out.println(word.toString());
         }
-    }
-
-    public static Iterator<String> getTokenIterator(TokenStream tokenStream) throws IOException {
-        CharTermAttribute termAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-        tokenStream.reset();
-        return new Iterator<String>() {
-            @Override
-            public boolean hasNext() {
-                try {
-                    return tokenStream.incrementToken();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-            @Override
-            public String next() {
-                return termAttribute.toString();
-            }
-        };
     }
 
 }
